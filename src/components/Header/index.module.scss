@@ -1,0 +1,54 @@
+@import '~@/styles/common/index';
+
+.container {
+  z-index: $zIndexHigh;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+
+  background-color: #111;
+  width: 100%;
+  height: 78px;
+  border-bottom: 0.1rem solid #212629;
+
+  font-size: 13px;
+}
+
+.wrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  max-width: 1440px;
+  height: 100%;
+  margin: 0 auto;
+  padding: 0 3rem;
+}
+
+.content {
+  display: flex;
+  align-items: center;
+  font-size: 0.9rem;
+  font-weight: 600;
+}
+
+.headerContent {
+  position: relative;
+
+  padding: 0.9rem;
+  padding-right: 1rem;
+  padding-left: 1rem;
+  border-radius: 2rem;
+  margin-right: 0.5rem;
+
+  color: #fff;
+
+  &:hover {
+    background-color: #31383d;
+  }
+}
+
+.current {
+  background-color: #31383d;
+}

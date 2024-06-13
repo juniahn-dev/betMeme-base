@@ -1,0 +1,69 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin: 50px 0 200px;
+
+  h1 {
+    font-size: 40px;
+    font-weight: bold;
+  }
+}
+
+.subTitle {
+  margin-top: 30px;
+
+  font-size: 20px;
+  color: rgb(182, 182, 182);
+}
+
+.imgContainer {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+
+  margin-top: 50px;
+
+  img {
+    object-fit: cover;
+    width: 180px;
+    height: 300px;
+    border-radius: 10px;
+  }
+}
+
+.btnHover {
+  cursor: pointer;
+
+  width: 150px;
+  height: 40px;
+  margin-top: 30px;
+  border-radius: 50px;
+  border: none;
+  background-size: 300% 100%;
+
+  font-size: 13px;
+  color: #fff;
+  text-align: center;
+
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.btnHover:hover {
+  background-position: 100% 0;
+  -o-transition: all 0.4s ease-in-out;
+  -webkit-transition: all 0.4s ease-in-out;
+  transition: all 0.4s ease-in-out;
+}
+
+.btnHover:focus {
+  outline: none;
+}
+
+.btnHover.color8 {
+  background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+  box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
+}
