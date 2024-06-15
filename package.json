@@ -19,7 +19,8 @@
     "recoil": "^0.7.7",
     "recoil-persist": "^5.1.0",
     "sass": "^1.77.5",
-    "uuid": "^10.0.0"
+    "uuid": "^10.0.0",
+    "web3": "^4.9.0"
   },
   "devDependencies": {
     "@types/lodash": "^4.17.5",

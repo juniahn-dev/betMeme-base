@@ -4,6 +4,7 @@ import Link from "next/link";
 import styles from "./index.module.scss";
 import { usePathname } from "next/navigation";
 import clsx from "clsx";
+import ConnectWallet from "./ConnectWallet";
 
 const Header = () => {
   const router = usePathname();
@@ -50,7 +51,7 @@ const Header = () => {
           >
             My Bet
           </Link>
-          <button>Connect</button>
+          <ConnectWallet />
         </div>
       </div>
     </div>
