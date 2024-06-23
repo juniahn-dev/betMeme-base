@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { Web3 } from "web3";
 
 const ConnectWallet: React.FC = () => {
-  const baseNetworkVersion = 8453;
+  const baseNetworkVersion = 84532;
   const [web3, setWeb3] = useState<Web3 | null>(null);
   const [connectedAccount, setConnectedAccount] = useState<string | null>(null);
 
@@ -16,7 +16,7 @@ const ConnectWallet: React.FC = () => {
     if (web3 && !connectedAccount) {
       connectMetamask();
     }
-  }, [web3]);
+  }, [web3, connectedAccount]);
 
   const changeNetwork = async () => {
     if (web3 && window.ethereum?.networkVersion !== baseNetworkVersion) {
