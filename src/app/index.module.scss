@@ -18,19 +18,8 @@
   color: rgb(182, 182, 182);
 }
 
-.imgContainer {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 10px;
-
+.listContainer {
   margin-top: 50px;
-
-  img {
-    object-fit: cover;
-    width: 180px;
-    height: 300px;
-    border-radius: 10px;
-  }
 }
 
 .btnHover {
@@ -64,6 +53,12 @@
 }
 
 .btnHover.color8 {
-  background-image: linear-gradient(to right, #29323c, #485563, #2b5876, #4e4376);
+  background-image: linear-gradient(
+    to right,
+    #29323c,
+    #485563,
+    #2b5876,
+    #4e4376
+  );
   box-shadow: 0 4px 15px 0 rgba(45, 54, 65, 0.75);
 }

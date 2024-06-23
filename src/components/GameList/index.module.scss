@@ -1,0 +1,24 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+.list {
+  border: 1px solid #fff;
+  padding: 10px;
+}
+
+.buttonWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  margin-top: 10px;
+
+  .button {
+    width: 100%;
+    border: 1px solid #fff;
+    padding: 10px 0;
+  }
+}

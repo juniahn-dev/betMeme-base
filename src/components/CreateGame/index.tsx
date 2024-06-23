@@ -10,6 +10,7 @@ const CreateGame = () => {
   const [duration, setDuration] = useState("");
   const [minAmount, setMinAmount] = useState("");
   const [tokenAddress, setTokenAddress] = useState("");
+  const [txLoading, setTxLoading] = useState(false);
 
   const createGame = async () => {
     if (!window.ethereum) {
@@ -33,45 +34,54 @@ const CreateGame = () => {
         tokenAddress
       );
 
+      setTxLoading(true);
       await tx.wait();
       alert("게임 생성 성공!");
     } catch (error) {
       console.error("게임 생성 실패:", error);
       alert("게임 생성 실패.");
+    } finally {
+      setTxLoading(false);
     }
   };
 
   return (
     <div className={styles.container}>
-      <InputBox
-        title="Marked Price"
-        placeholder="Marked Price"
-        value={markedPrice}
-        onChange={(val) => setMarkedPrice(val.target.value)}
-        required={true}
-      />
-      <InputBox
-        title="Duration"
-        placeholder="Duration"
-        value={duration}
-        onChange={(val) => setDuration(val.target.value)}
-        required={true}
-      />
-      <InputBox
-        title="Minimum Amount"
-        placeholder="Minimum Amount"
-        value={minAmount}
-        onChange={(val) => setMinAmount(val.target.value)}
-        required={true}
-      />
-      <InputBox
-        title="Token Address"
-        placeholder="Token Address"
-        value={tokenAddress}
-        onChange={(val) => setTokenAddress(val.target.value)}
-        required={true}
-      />
-      <Button name="Create Game" onClick={createGame} />
+      {txLoading ? (
+        <div>Loading</div>
+      ) : (
+        <>
+          <InputBox
+            title="Marked Price"
+            placeholder="Marked Price"
+            value={markedPrice}
+            onChange={(val) => setMarkedPrice(val.target.value)}
+            required={true}
+          />
+          <InputBox
+            title="Duration"
+            placeholder="Duration"
+            value={duration}
+            onChange={(val) => setDuration(val.target.value)}
+            required={true}
+          />
+          <InputBox
+            title="Minimum Amount"
+            placeholder="Minimum Amount"
+            value={minAmount}
+            onChange={(val) => setMinAmount(val.target.value)}
+            required={true}
+          />
+          <InputBox
+            title="Token Address"
+            placeholder="Token Address"
+            value={tokenAddress}
+            onChange={(val) => setTokenAddress(val.target.value)}
+            required={true}
+          />
+          <Button name="Create Game" onClick={createGame} />
+        </>
+      )}
     </div>
   );
 };

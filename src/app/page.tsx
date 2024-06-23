@@ -23,7 +23,7 @@ export default function Home() {
           >
             Let's Bet!
           </button>
-          <div className={styles.imgContainer}>
+          <div className={styles.listContainer}>
             <GameList />
           </div>
         </div>
