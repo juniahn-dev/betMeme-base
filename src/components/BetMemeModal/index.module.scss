@@ -1,0 +1,121 @@
+.closeBtn {
+  cursor: pointer;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.betStatus {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  font-size: 20px;
+
+  & + & {
+    margin-top: 20px;
+  }
+
+  .upAmount {
+    color: #15ae62;
+  }
+
+  .downAmount {
+    color: #ae1515;
+  }
+}
+
+.amountInput {
+  margin: 50px 0 20px;
+
+  .amountPrice {
+    display: flex;
+    justify-content: flex-end;
+  }
+}
+
+.buttonContainer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.button {
+  display: flex;
+  justify-content: center;
+
+  background-color: rgba(41, 41, 41, 0.5);
+  border: 0.1rem solid #31383d;
+  padding: 20px;
+
+  &:hover {
+    .upImg {
+      transform: translateY(-10px);
+    }
+
+    .downImg {
+      transform: translateY(+10px);
+    }
+  }
+
+  &.up {
+    border-radius: 10px 0 0 10px;
+
+    &:hover {
+      background-color: #13a65c59;
+    }
+  }
+
+  &.down {
+    border-radius: 0 10px 10px 0;
+
+    &:hover {
+      background-color: #a6131359;
+    }
+  }
+
+  .cursor {
+    transition: transform 250ms;
+
+    margin-left: 10px;
+
+    & > img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+}
+
+.inputContainer {
+  position: relative;
+
+  .inputBox {
+    background-color: rgba(41, 41, 41, 0.5);
+    width: -webkit-fill-available;
+    padding: 30px 10px 10px 60px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.089);
+    margin-top: 10px;
+  }
+
+  .tokenImg {
+    position: absolute;
+    top: 23px;
+    left: 13px;
+
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+  }
+
+  .amountText {
+    position: absolute;
+    top: 20px;
+    left: 61px;
+
+    font-size: 13px;
+  }
+}
