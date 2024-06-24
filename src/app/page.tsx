@@ -5,6 +5,10 @@ import styles from "./index.module.scss";
 import clsx from "clsx";
 import { useRouter } from "next/navigation";
 import GameList from "@/components/GameList";
+import Bet1JPEG from "@/assets/icons/main/bet1.jpeg";
+import Bet2JPEG from "@/assets/icons/main/bet2.jpeg";
+import Bet3JPEG from "@/assets/icons/main/bet3.jpeg";
+import Bet4JPEG from "@/assets/icons/main/bet4.jpeg";
 
 export default function Home() {
   const router = useRouter();
@@ -23,10 +27,14 @@ export default function Home() {
           >
             Let's Bet!
           </button>
-          <div className={styles.listContainer}>
-            <GameList />
+          <div className={styles.imgContainer}>
+            <img src={Bet1JPEG.src} />
+            <img src={Bet2JPEG.src} />
+            <img src={Bet3JPEG.src} />
+            <img src={Bet4JPEG.src} />
           </div>
         </div>
+        <GameList />
       </div>
     </Wrapper>
   );

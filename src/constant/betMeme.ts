@@ -1,5 +1,5 @@
 export const betMemeContractAddress =
-  "0x22a2fBeB4C48E30706D6be5bDDaec863a6FEf58d";
+  "0x4a65BADe94B89214c243C4ea977B109d1Bc327Fb";
 
 export const betMemeAbi = [
   {
@@ -203,6 +203,11 @@ export const betMemeAbi = [
     outputs: [
       {
         internalType: "uint256",
+        name: "gameId",
+        type: "uint256",
+      },
+      {
+        internalType: "uint256",
         name: "startTime",
         type: "uint256",
       },
@@ -261,6 +266,11 @@ export const betMemeAbi = [
     outputs: [
       {
         components: [
+          {
+            internalType: "uint256",
+            name: "gameId",
+            type: "uint256",
+          },
           {
             internalType: "uint256",
             name: "startTime",
@@ -326,6 +336,11 @@ export const betMemeAbi = [
     outputs: [
       {
         components: [
+          {
+            internalType: "uint256",
+            name: "gameId",
+            type: "uint256",
+          },
           {
             internalType: "uint256",
             name: "startTime",
@@ -399,6 +414,11 @@ export const betMemeAbi = [
         components: [
           {
             internalType: "uint256",
+            name: "gameId",
+            type: "uint256",
+          },
+          {
+            internalType: "uint256",
             name: "startTime",
             type: "uint256",
           },
@@ -462,6 +482,11 @@ export const betMemeAbi = [
     outputs: [
       {
         components: [
+          {
+            internalType: "uint256",
+            name: "gameId",
+            type: "uint256",
+          },
           {
             internalType: "uint256",
             name: "startTime",
