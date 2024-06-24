@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { ethers } from "ethers";
 import { betMemeAbi, betMemeContractAddress } from "@/constant/betMeme";
 import styles from "./index.module.scss";
+import Button from "../Common/Button";
 
 const GameList = () => {
   const [games, setGames] = useState([]);
@@ -85,6 +86,14 @@ const GameList = () => {
 
         return (
           <div key={index} className={styles.list}>
+            <Button
+              name="Make Frame"
+              onClick={() =>
+                navigator.clipboard.writeText(
+                  `https://ce5b-69-172-159-97.ngrok-free.app/api/${Number(gameId)}`
+                )
+              }
+            />
             <li>
               <p>
                 게임 시작 시간:{" "}
@@ -104,18 +113,8 @@ const GameList = () => {
               <div>Loading ...</div>
             ) : (
               <div className={styles.buttonWrapper}>
-                <button
-                  className={styles.button}
-                  onClick={() => betGame(gameId, true)}
-                >
-                  Up
-                </button>
-                <button
-                  className={styles.button}
-                  onClick={() => betGame(gameId, false)}
-                >
-                  Down
-                </button>
+                <Button name="Up" onClick={() => betGame(gameId, true)} />
+                <Button name="Down" onClick={() => betGame(gameId, false)} />
               </div>
             )}
           </div>
