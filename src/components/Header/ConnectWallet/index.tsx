@@ -2,6 +2,7 @@ import { getaccountAssetsStorageState } from "@/store/account";
 import { useEffect, useState } from "react";
 import { useRecoilState } from "recoil";
 import { Web3 } from "web3";
+import styles from "./index.module.scss";
 
 const ConnectWallet: React.FC = () => {
   const [accountAssets, setAccountAssetsState] = useRecoilState(
@@ -43,7 +44,6 @@ const ConnectWallet: React.FC = () => {
 
         await window.ethereum.request({ method: "eth_requestAccounts" });
         const accounts = await web3!.eth.getAccounts();
-        const balances = await web3!.eth.getBalance(accounts[0]);
         const value = {
           account: accounts[0],
         };
@@ -57,7 +57,7 @@ const ConnectWallet: React.FC = () => {
   };
 
   return (
-    <button onClick={() => connectMetamask()}>
+    <button className={styles.container} onClick={() => connectMetamask()}>
       {accountAssets.account || "Connect"}
     </button>
   );

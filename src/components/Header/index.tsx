@@ -31,15 +31,6 @@ const Header = () => {
           >
             Create MEME Bet
           </Link>
-          <Link
-            className={clsx(
-              styles.headerContent,
-              router === "/create-nft-bet" && styles.current
-            )}
-            href="/create-nft-bet"
-          >
-            Create NFT Bet
-          </Link>
         </div>
         <div className={styles.content}>
           <Link
