@@ -1,10 +1,14 @@
+import { getaccountAssetsStorageState } from "@/store/account";
 import { useEffect, useState } from "react";
+import { useRecoilState } from "recoil";
 import { Web3 } from "web3";
 
 const ConnectWallet: React.FC = () => {
+  const [accountAssets, setAccountAssetsState] = useRecoilState(
+    getaccountAssetsStorageState
+  );
   const baseNetworkVersion = 84532;
   const [web3, setWeb3] = useState<Web3 | null>(null);
-  const [connectedAccount, setConnectedAccount] = useState<string | null>(null);
 
   useEffect(() => {
     if (typeof window !== "undefined" && window.ethereum) {
@@ -13,10 +17,10 @@ const ConnectWallet: React.FC = () => {
   }, []);
 
   useEffect(() => {
-    if (web3 && !connectedAccount) {
+    if (web3 && !accountAssets.account) {
       connectMetamask();
     }
-  }, [web3, connectedAccount]);
+  }, [web3, accountAssets.account]);
 
   const changeNetwork = async () => {
     if (web3 && window.ethereum?.networkVersion !== baseNetworkVersion) {
@@ -39,7 +43,11 @@ const ConnectWallet: React.FC = () => {
 
         await window.ethereum.request({ method: "eth_requestAccounts" });
         const accounts = await web3!.eth.getAccounts();
-        setConnectedAccount(accounts[0]);
+        const balances = await web3!.eth.getBalance(accounts[0]);
+        const value = {
+          account: accounts[0],
+        };
+        setAccountAssetsState(value);
       } catch (err: any) {
         console.error(err.message);
       }
@@ -50,7 +58,7 @@ const ConnectWallet: React.FC = () => {
 
   return (
     <button onClick={() => connectMetamask()}>
-      {connectedAccount || "Connect"}
+      {accountAssets.account || "Connect"}
     </button>
   );
 };
