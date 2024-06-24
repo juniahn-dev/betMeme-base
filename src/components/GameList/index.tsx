@@ -5,7 +5,7 @@ import styles from "./index.module.scss";
 
 const GameList = () => {
   const [games, setGames] = useState([]);
-  const [amount, setAmount] = useState("777");
+  const [amount, setAmount] = useState("0.01");
   const [txLoading, setTxLoading] = useState(false);
 
   useEffect(() => {
@@ -46,16 +46,28 @@ const GameList = () => {
       betMemeAbi,
       signer
     );
+    const tokenContract = new ethers.Contract(
+      "0xE4aB69C077896252FAFBD49EFD26B5D171A32410",
+      betMemeAbi,
+      signer
+    );
 
     try {
-      // TODO: approve를 해야 한다고 함 approve를 안하면 에러가 남
+      setTxLoading(true);
+
+      const amountInWei = ethers.parseUnits(amount, "ether");
+      const approveTx = await tokenContract.approve(
+        betMemeContractAddress,
+        amountInWei
+      );
+      await approveTx.wait();
+
       const tx = await contract.bet(
         gameId,
         position,
         ethers.parseUnits(amount, "ether")
       );
 
-      setTxLoading(true);
       await tx.wait();
       alert("게임 배팅 성공!");
     } catch (error) {
@@ -88,20 +100,24 @@ const GameList = () => {
               <p>종료 여부: {game[9] ? "Yes" : "No"}</p>
               <p>토큰 주소: {game[10]}</p>
             </li>
-            <div className={styles.buttonWrapper}>
-              <button
-                className={styles.button}
-                onClick={() => betGame(gameId, true)}
-              >
-                Up
-              </button>
-              <button
-                className={styles.button}
-                onClick={() => betGame(gameId, false)}
-              >
-                Down
-              </button>
-            </div>
+            {txLoading ? (
+              <div>Loading ...</div>
+            ) : (
+              <div className={styles.buttonWrapper}>
+                <button
+                  className={styles.button}
+                  onClick={() => betGame(gameId, true)}
+                >
+                  Up
+                </button>
+                <button
+                  className={styles.button}
+                  onClick={() => betGame(gameId, false)}
+                >
+                  Down
+                </button>
+              </div>
+            )}
           </div>
         );
       })}

@@ -27,6 +27,8 @@ const CreateGame = () => {
     );
 
     try {
+      setTxLoading(true);
+
       const tx = await contract.createGame(
         ethers.parseUnits(markedPrice, "ether"),
         duration,
@@ -34,7 +36,6 @@ const CreateGame = () => {
         tokenAddress
       );
 
-      setTxLoading(true);
       await tx.wait();
       alert("게임 생성 성공!");
     } catch (error) {
