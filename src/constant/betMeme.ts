@@ -1,5 +1,5 @@
 export const betMemeContractAddress =
-  "0x4a65BADe94B89214c243C4ea977B109d1Bc327Fb";
+  "0x9c440521dF71e1242B8d1aEB9556EfE5c7a04867";
 
 export const betMemeAbi = [
   {
@@ -345,6 +345,11 @@ export const betMemeAbi = [
             name: "token",
             type: "address",
           },
+          {
+            internalType: "address[]",
+            name: "betUsers",
+            type: "address[]",
+          },
         ],
         internalType: "struct BetMeme.Game[]",
         name: "",
@@ -414,6 +419,11 @@ export const betMemeAbi = [
             internalType: "contract IERC20",
             name: "token",
             type: "address",
+          },
+          {
+            internalType: "address[]",
+            name: "betUsers",
+            type: "address[]",
           },
         ],
         internalType: "struct BetMeme.Game[]",
@@ -491,6 +501,11 @@ export const betMemeAbi = [
             name: "token",
             type: "address",
           },
+          {
+            internalType: "address[]",
+            name: "betUsers",
+            type: "address[]",
+          },
         ],
         internalType: "struct BetMeme.Game",
         name: "",
@@ -561,6 +576,11 @@ export const betMemeAbi = [
             name: "token",
             type: "address",
           },
+          {
+            internalType: "address[]",
+            name: "betUsers",
+            type: "address[]",
+          },
         ],
         internalType: "struct BetMeme.Game[]",
         name: "",
@@ -583,6 +603,11 @@ export const betMemeAbi = [
       {
         components: [
           {
+            internalType: "uint256",
+            name: "gameId",
+            type: "uint256",
+          },
+          {
             internalType: "bool",
             name: "betUp",
             type: "bool",
@@ -591,6 +616,11 @@ export const betMemeAbi = [
             internalType: "uint256",
             name: "amount",
             type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "status",
+            type: "string",
           },
         ],
         internalType: "struct BetMeme.UserBet",
@@ -608,6 +638,11 @@ export const betMemeAbi = [
       {
         components: [
           {
+            internalType: "uint256",
+            name: "gameId",
+            type: "uint256",
+          },
+          {
             internalType: "bool",
             name: "betUp",
             type: "bool",
@@ -616,6 +651,11 @@ export const betMemeAbi = [
             internalType: "uint256",
             name: "amount",
             type: "uint256",
+          },
+          {
+            internalType: "string",
+            name: "status",
+            type: "string",
           },
         ],
         internalType: "struct BetMeme.UserBet[]",
@@ -642,6 +682,11 @@ export const betMemeAbi = [
     name: "userBets",
     outputs: [
       {
+        internalType: "uint256",
+        name: "gameId",
+        type: "uint256",
+      },
+      {
         internalType: "bool",
         name: "betUp",
         type: "bool",
@@ -650,6 +695,11 @@ export const betMemeAbi = [
         internalType: "uint256",
         name: "amount",
         type: "uint256",
+      },
+      {
+        internalType: "string",
+        name: "status",
+        type: "string",
       },
     ],
     stateMutability: "view",

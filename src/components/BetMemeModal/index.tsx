@@ -41,7 +41,7 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
       signer
     );
     const tokenContract = new ethers.Contract(
-      "0xE4aB69C077896252FAFBD49EFD26B5D171A32410",
+      "0xBE5Da172BbffffF5AEa27017745e71eA1907dad1", // 특정 token
       betMemeAbi,
       signer
     );
@@ -66,7 +66,7 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
       alert("게임 배팅 성공!");
     } catch (error) {
       console.error("게임 배팅 실패:", error);
-      alert("게임 배팅 실패.");
+      alert("게임 배팅 실패");
     } finally {
       setTxLoading(false);
     }
@@ -97,10 +97,6 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
               </div>
             </div>
             <div className={styles.amountInput}>
-              <div className={styles.amountPrice}>
-                {/* Balance: {numberWithCommas(Number(betTargetPrice) / DECIMAL_UNIT)} {getToken(betValue.denom)} */}
-                789
-              </div>
               <div className={styles.inputContainer}>
                 {/* <img src={getImage(betValue.denom)} alt="fud the pug" className={styles.tokenImg} /> */}
                 <input
