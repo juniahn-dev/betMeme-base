@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import BetMemeModal from "@/components/BetMemeModal";
 import clsx from "clsx";
-import { getCoingInfo, getPrice } from "@/utils/makeCoins";
+import { frameLink, getCoingInfo, getPrice } from "@/utils/makeCoins";
 import { DECIMAL_UNIT, RESULT_DURATION } from "@/constant/constant";
 import { numberWithCommas } from "@/utils/formatNumber";
 import { IGameProps } from "..";
@@ -76,11 +76,12 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
             </div>
             <Button
               name="copy"
-              onClick={() =>
+              onClick={() => {
                 navigator.clipboard.writeText(
-                  `https://ce5b-69-172-159-97.ngrok-free.app/api/${Number(game.gameId)}/${game.token}`
-                )
-              }
+                  `${frameLink}${Number(game.gameId)}/${game.token}`
+                );
+                alert("copy frame link!");
+              }}
               styled={styles.copyBtn}
             />
           </div>

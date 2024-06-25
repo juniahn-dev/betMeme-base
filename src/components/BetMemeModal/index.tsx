@@ -43,11 +43,7 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
       betMemeAbi,
       signer
     );
-    const tokenContract = new ethers.Contract(
-      "0xBE5Da172BbffffF5AEa27017745e71eA1907dad1", // 특정 token
-      betMemeAbi,
-      signer
-    );
+    const tokenContract = new ethers.Contract(game.token, betMemeAbi, signer);
 
     try {
       setTxLoading(true);
