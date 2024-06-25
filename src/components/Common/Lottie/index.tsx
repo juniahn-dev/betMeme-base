@@ -1,17 +1,22 @@
-import Lottie, { Options } from 'react-lottie';
+import Lottie, { Options } from "react-lottie";
 
 interface ILottieContainerProps {
   lottieData: unknown;
   className?: string;
+  loopNum?: number;
 }
 
-const LottieContainer: React.FC<ILottieContainerProps> = ({ lottieData, className }) => {
+const LottieContainer: React.FC<ILottieContainerProps> = ({
+  lottieData,
+  className,
+  loopNum = 0,
+}) => {
   const lottieDefaultOptions: Options = {
-    loop: 0,
+    loop: loopNum,
     autoplay: true,
     animationData: lottieData,
     rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
+      preserveAspectRatio: "xMidYMid slice",
       className,
     },
   };

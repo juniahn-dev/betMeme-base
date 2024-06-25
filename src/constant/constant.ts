@@ -1,1 +1,2 @@
 export const DECIMAL_UNIT = 100000000000000000;
+export const RESULT_DURATION = 1000 * 60;

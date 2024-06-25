@@ -4,10 +4,17 @@ import { ethers } from "ethers";
 import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styles from "./index.module.scss";
-import LottieContainer from "../Common/Lottie";
 import TrophyLottie from "@/assets/icons/lottie/TrophyLottie.json";
 import GiftLottie from "@/assets/icons/lottie/GiftLottie.json";
+import PendingLottie from "@/assets/icons/lottie/PendingLottie.json";
 import { numberWithCommas } from "@/utils/formatNumber";
+import { isEmpty } from "lodash";
+import dynamic from "next/dynamic";
+import clsx from "clsx";
+
+const Lottie = dynamic(() => import("../Common/Lottie"), {
+  ssr: false,
+});
 
 interface IBetsProps {
   amount: string;
@@ -46,6 +53,10 @@ const UserBet = () => {
               v[0]
             );
 
+            if (isEmpty(betList[3])) {
+              continue;
+            }
+
             allBets.push({
               gameId: betList[0],
               betUp: betList[1],
@@ -68,25 +79,32 @@ const UserBet = () => {
   return (
     <div className={styles.container}>
       {bets.map((v, idx) => {
-        console.log(v);
         return (
           <div key={idx} className={styles.claimContainer}>
             <div className={styles.item}>
               <div className={styles.itemRight}>
                 <div className={styles.title}>
-                  {v.status}
+                  {v.status === "PENDING" && (
+                    <>
+                      PENDING
+                      <Lottie
+                        lottieData={PendingLottie}
+                        className={clsx(styles.lottie, styles.pending)}
+                      />
+                    </>
+                  )}
                   {v.status !== "PENDING" && (
                     <>
                       <p className={styles.expiredStatus}>
                         <div>{v.status === "WON" ? "Winner" : "Loser"}</div>
                       </p>
                       {v.status === "WON" ? (
-                        <LottieContainer
+                        <Lottie
                           lottieData={TrophyLottie}
                           className={styles.lottie}
                         />
                       ) : (
-                        <LottieContainer
+                        <Lottie
                           lottieData={GiftLottie}
                           className={styles.lottie}
                         />

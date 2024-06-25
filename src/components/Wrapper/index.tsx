@@ -8,12 +8,6 @@ interface WrapperProps {
 }
 
 const Wrapper: React.FC<WrapperProps> = ({ children }) => {
-  // const { isConnecting } = useCurrentWallet();
-
-  // if (isConnecting) {
-  //   return <Loading />;
-  // }
-
   return (
     <div className={styles.container}>
       <Header />

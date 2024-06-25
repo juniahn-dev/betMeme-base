@@ -30,6 +30,16 @@
 
 .amountInput {
   margin: 50px 0 20px;
+
+  .minAmount {
+    text-align: end;
+  }
+}
+
+.loadingContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .buttonContainer {

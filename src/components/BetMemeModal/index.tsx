@@ -9,9 +9,12 @@ import DecreaseIconPNG from "@/assets/icons/common/DecreaseIcon.png";
 import { numberWithCommas } from "@/utils/formatNumber";
 import { ethers } from "ethers";
 import { betMemeAbi, betMemeContractAddress } from "@/constant/betMeme";
+import { IGameProps } from "../GameList";
+import { getCoingInfo } from "@/utils/makeCoins";
+import LottieContainer from "../Common/Loading";
 
 interface IBetMemeModalProps {
-  game: any;
+  game: IGameProps;
   modalView: boolean;
   onCloseModal: React.Dispatch<React.SetStateAction<boolean>>;
 }
@@ -23,9 +26,9 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
 }) => {
   const [amount, setAmount] = useState("0");
   const [txLoading, setTxLoading] = useState(false);
-  const gameId = game[0];
-  const upAmount = ethers.formatUnits(game[6], "ether");
-  const downAmount = ethers.formatUnits(game[7], "ether");
+  const gameId = String(game.gameId);
+  const upAmount = game.upAmount;
+  const downAmount = game.downAmount;
 
   const betGame = async (gameId: string, position: boolean) => {
     if (!window.ethereum) {
@@ -87,18 +90,27 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
             <div className={styles.betStatus}>
               Up
               <div className={styles.upAmount}>
-                {numberWithCommas(Number(upAmount))}
+                {numberWithCommas(Number(upAmount))}{" "}
+                {getCoingInfo(game.token).denom}
               </div>
             </div>
             <div className={styles.betStatus}>
               Down
               <div className={styles.downAmount}>
-                {numberWithCommas(Number(downAmount))}
+                {numberWithCommas(Number(downAmount))}{" "}
+                {getCoingInfo(game.token).denom}
               </div>
             </div>
             <div className={styles.amountInput}>
+              <div
+                className={styles.minAmount}
+              >{`Minimun bet amount ${game.minAmount}`}</div>
               <div className={styles.inputContainer}>
-                {/* <img src={getImage(betValue.denom)} alt="fud the pug" className={styles.tokenImg} /> */}
+                <img
+                  src={getCoingInfo(game.token).image}
+                  alt="meme-coin-img"
+                  className={styles.tokenImg}
+                />
                 <input
                   className={styles.inputBox}
                   placeholder="How much?"
@@ -110,7 +122,9 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
             </div>
           </div>
           {txLoading ? (
-            <div>Loading</div>
+            <div className={styles.loadingContainer}>
+              <LottieContainer />
+            </div>
           ) : (
             <div className={styles.buttonContainer}>
               <button

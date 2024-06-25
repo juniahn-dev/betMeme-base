@@ -4,6 +4,7 @@ import styles from "./index.module.scss";
 import { betMemeAbi, betMemeContractAddress } from "@/constant/betMeme";
 import InputBox from "../Common/InputBox";
 import Button from "../Common/Button";
+import LottieContainer from "../Common/Loading";
 
 const CreateGame = () => {
   const [markedPrice, setMarkedPrice] = useState("");
@@ -49,9 +50,9 @@ const CreateGame = () => {
   return (
     <div className={styles.container}>
       {txLoading ? (
-        <div>Loading</div>
+        <LottieContainer />
       ) : (
-        <>
+        <div className={styles.wrapper}>
           <InputBox
             title="Marked Price"
             placeholder="Marked Price"
@@ -81,7 +82,7 @@ const CreateGame = () => {
             required={true}
           />
           <Button name="Create Game" onClick={createGame} />
-        </>
+        </div>
       )}
     </div>
   );
