@@ -10,7 +10,7 @@ import { numberWithCommas } from "@/utils/formatNumber";
 import { ethers } from "ethers";
 import { betMemeAbi, betMemeContractAddress } from "@/constant/betMeme";
 import { IGameProps } from "../GameList";
-import { getCoingInfo } from "@/utils/makeCoins";
+import { getCoinInfo } from "@/utils/makeCoins";
 import LottieContainer from "../Common/Loading";
 
 interface IBetMemeModalProps {
@@ -87,14 +87,14 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
               Up
               <div className={styles.upAmount}>
                 {numberWithCommas(Number(upAmount))}{" "}
-                {getCoingInfo(game.token).denom}
+                {getCoinInfo(game.token).denom}
               </div>
             </div>
             <div className={styles.betStatus}>
               Down
               <div className={styles.downAmount}>
                 {numberWithCommas(Number(downAmount))}{" "}
-                {getCoingInfo(game.token).denom}
+                {getCoinInfo(game.token).denom}
               </div>
             </div>
             <div className={styles.amountInput}>
@@ -103,7 +103,7 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
               >{`Minimun bet amount ${game.minAmount}`}</div>
               <div className={styles.inputContainer}>
                 <img
-                  src={getCoingInfo(game.token).image}
+                  src={getCoinInfo(game.token).image}
                   alt="meme-coin-img"
                   className={styles.tokenImg}
                 />

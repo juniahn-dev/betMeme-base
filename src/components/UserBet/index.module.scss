@@ -96,22 +96,6 @@
   height: 60% !important;
 }
 
-.buttons {
-  display: flex;
-  justify-content: flex-end;
-
-  button {
-    background-color: #999;
-    padding: 10px;
-    margin-left: 10px;
-    border-radius: 10px;
-
-    &:hover {
-      background-color: plum;
-    }
-  }
-}
-
 .betList {
   display: flex;
   align-items: center;

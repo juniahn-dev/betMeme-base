@@ -22,7 +22,7 @@ export const getPrice = (address: string) => {
   }
 };
 
-export const getCoingInfo = (address: string) => {
+export const getCoinInfo = (address: string) => {
   if (address.indexOf("0xBE5Da172BbffffF5AEa27017745e71eA1907dad1") >= 0) {
     return {
       image:

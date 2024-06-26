@@ -3,7 +3,7 @@ import { useMemo, useState } from "react";
 import styles from "./index.module.scss";
 import BetMemeModal from "@/components/BetMemeModal";
 import clsx from "clsx";
-import { frameLink, getCoingInfo, getPrice } from "@/utils/makeCoins";
+import { frameLink, getCoinInfo, getPrice } from "@/utils/makeCoins";
 import { DECIMAL_UNIT } from "@/constant/constant";
 import { numberWithCommas } from "@/utils/formatNumber";
 import { IGameProps } from "..";
@@ -94,11 +94,11 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
           <div>
             <div className={styles.betInfo}>
               <img
-                src={getCoingInfo(game.token).image}
+                src={getCoinInfo(game.token).image}
                 alt="img"
                 className={styles.tokenImg}
               />
-              {getCoingInfo(game.token).denom} 🦇 ${game.lastPrice}
+              {getCoinInfo(game.token).denom} 🦇 ${game.lastPrice}
             </div>
             <div className={styles.lockedContainer}>
               {game.isEnded && Number(game.lastPrice) > 0 ? (
@@ -109,12 +109,7 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
               <div className={styles.betResult}>
                 {game.isEnded && Number(game.lastPrice) > 0 ? (
                   <>
-                    <>
-                      $
-                      {Number(Number(game.lastPrice) / DECIMAL_UNIT).toFixed(
-                        10
-                      )}
-                    </>
+                    <>${(Number(game.lastPrice) / DECIMAL_UNIT).toFixed(10)}</>
                     {Number(game.lastPrice) - Number(game.markedPrice) > 0 ? (
                       <div className={clsx(styles.betPercent, styles.isPlus)}>
                         Up Win !
@@ -141,38 +136,38 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
                 Locked Pool:
                 <div>
                   {numberWithCommas(lockedAmount)}{" "}
-                  {getCoingInfo(game.token).denom}
+                  {getCoinInfo(game.token).denom}
                 </div>
               </div>
               <div className={styles.lockedAmount}>
                 Bet Up:
                 <div>
                   {numberWithCommas(Number(game.upAmount))}{" "}
-                  {getCoingInfo(game.token).denom} ( win to{" "}
+                  {getCoinInfo(game.token).denom} ( win to{" "}
                   {numberWithCommas(
                     Number(game.upAmount) +
                       (Number(game.downAmount) * 0.7 + Number(game.prizeAmount))
                   )}{" "}
-                  {getCoingInfo(game.token).denom} )
+                  {getCoinInfo(game.token).denom} )
                 </div>
               </div>
               <div className={styles.lockedAmount}>
                 Bet Down:
                 <div>
                   {numberWithCommas(Number(game.downAmount))}{" "}
-                  {getCoingInfo(game.token).denom} ( win to{" "}
+                  {getCoinInfo(game.token).denom} ( win to{" "}
                   {numberWithCommas(
                     Number(game.downAmount) +
                       (Number(game.upAmount) * 0.7 + Number(game.prizeAmount))
                   )}{" "}
-                  {getCoingInfo(game.token).denom} )
+                  {getCoinInfo(game.token).denom} )
                 </div>
               </div>
               <div className={styles.lockedAmount}>
                 Prize Pool:
                 <div>
                   {numberWithCommas(Number(game.prizeAmount))}{" "}
-                  {getCoingInfo(game.token).denom}
+                  {getCoinInfo(game.token).denom}
                 </div>
               </div>
             </div>

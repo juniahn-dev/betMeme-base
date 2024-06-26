@@ -11,6 +11,7 @@ import { numberWithCommas } from "@/utils/formatNumber";
 import { isEmpty } from "lodash";
 import dynamic from "next/dynamic";
 import clsx from "clsx";
+import { getPrice } from "@/utils/makeCoins";
 
 const Lottie = dynamic(() => import("../Common/Lottie"), {
   ssr: false,
@@ -21,6 +22,9 @@ interface IBetsProps {
   betUp: boolean;
   gameId: BigInt;
   status: "PENDING" | "WON" | "LOSE";
+  markedPrice: string;
+  lastPrice: string;
+  prizeAmount: string;
   token: string;
 }
 
@@ -62,6 +66,9 @@ const UserBet = () => {
               betUp: betList[1],
               amount: String(betList[2]),
               status: betList[3],
+              markedPrice: ethers.formatUnits(v[3], "ether"),
+              lastPrice: ethers.formatUnits(v[4], "ether"),
+              prizeAmount: ethers.formatUnits(v[8], "ether"),
               token: v[10],
             });
           }
@@ -79,6 +86,16 @@ const UserBet = () => {
   return (
     <div className={styles.container}>
       {bets.map((v, idx) => {
+        const price = getPrice(v.token || "");
+
+        const pricePercentage = (() => {
+          const percent =
+            ((Number(price) - Number(v.markedPrice)) / Number(v.markedPrice)) *
+            100;
+
+          return percent;
+        })();
+
         return (
           <div key={idx} className={styles.claimContainer}>
             <div className={styles.item}>
@@ -126,31 +143,28 @@ const UserBet = () => {
                     Bet Amount
                     <div>{numberWithCommas(Number(v.amount) / 10 ** 18)}</div>
                   </div>
-                  {/* {objectData?.lastPrice <= 0 && (
-              <>
-                <div className={styles.priceWrapper}>
-                  <div className={styles.priceContainer}>
-                    <div className={styles.priceTitle}>Start Price</div>
-                    <div>{Number(objectData?.markedPrice / DECIMAL_UNIT).toFixed(10)}</div>
-                  </div>
-                  <div className={styles.priceContainer}>
-                    <div className={styles.priceTitle}>Current Price</div>
-                    <div>{price}</div>
-                  </div>
-                </div>
-                <div className={clsx(styles.percentage, pricePercentage > 0 && styles.isPlus)}>
-                  {pricePercentage.toFixed(2)} %
-                </div>
-              </>
-            )} */}
-                </div>
-                <div className={styles.buttons}>
-                  {/* {nowStatus === 'expired' && objectData?.lastPrice > 0 && (
-              <>
-                {gameResult === 'win' && <button onClick={() => claim('claim', value)}>Claim</button>}
-                {gameResult === 'lose' && <button onClick={() => claim('callenge', value)}>Challenge</button>}
-              </>
-            )} */}
+                  {Number(v.lastPrice) <= 0 && (
+                    <>
+                      <div className={styles.priceWrapper}>
+                        <div className={styles.priceContainer}>
+                          <div className={styles.priceTitle}>Start Price</div>
+                          <div>{Number(v.markedPrice).toFixed(10)}</div>
+                        </div>
+                        <div className={styles.priceContainer}>
+                          <div className={styles.priceTitle}>Current Price</div>
+                          <div>{price}</div>
+                        </div>
+                      </div>
+                      <div
+                        className={clsx(
+                          styles.percentage,
+                          pricePercentage > 0 && styles.isPlus
+                        )}
+                      >
+                        {pricePercentage.toFixed(2)} %
+                      </div>
+                    </>
+                  )}
                 </div>
               </div>
             </div>
