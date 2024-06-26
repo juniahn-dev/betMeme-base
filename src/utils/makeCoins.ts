@@ -1,5 +1,5 @@
 export const frameLink =
-  "https://347f-50-64-122-33.ngrok-free.app/api/approve/";
+  "https://1e97-119-205-221-93.ngrok-free.app/api/approve/";
 
 const decimals = 10;
 export const pudMinValue = 0.0000002;

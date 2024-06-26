@@ -40,7 +40,6 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
   } else {
     nowStatus = "live";
   }
-  console.log(dateSecond, game.startTime, game.duration);
 
   const remain = (
     (Number(game.duration) - (dateSecond - Number(game.startTime))) /
@@ -98,7 +97,8 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
                 alt="img"
                 className={styles.tokenImg}
               />
-              {getCoinInfo(game.token).denom} 🦇 ${game.lastPrice}
+              {getCoinInfo(game.token).denom} 🦇{" "}
+              {nowStatus === "expired" && `$${game.lastPrice}`}
             </div>
             <div className={styles.lockedContainer}>
               {game.isEnded && Number(game.lastPrice) > 0 ? (
