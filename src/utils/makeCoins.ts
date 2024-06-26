@@ -2,8 +2,8 @@ export const frameLink =
   "https://b750-119-205-221-93.ngrok-free.app/api/approve/";
 
 const decimals = 10;
-export const pudMinValue = 0.0000002;
-export const pudMaxValue = 0.0000003;
+export const pudMinValue = 0.9;
+export const pudMaxValue = 1.1;
 
 export const getRandomBetween = (basePrice: number) => {
   const randomValue = Math.random() * 0.2 * basePrice + basePrice * 0.9;
@@ -12,11 +12,11 @@ export const getRandomBetween = (basePrice: number) => {
 
 export const getPrice = (address: string) => {
   if (address.indexOf("0xBE5Da172BbffffF5AEa27017745e71eA1907dad1") >= 0) {
-    return getRandomBetween(0.0000002688);
+    return getRandomBetween(0.98);
   } else if (
     address.indexOf("0xE4aB69C077896252FAFBD49EFD26B5D171A32410") >= 0
   ) {
-    return getRandomBetween(0.0000003688);
+    return getRandomBetween(1.03);
   } else {
     return getRandomBetween(1);
   }

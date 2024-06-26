@@ -1,5 +1,5 @@
 export const betMemeContractAddress =
-  "0x9c440521dF71e1242B8d1aEB9556EfE5c7a04867";
+  "0x3D50b0272c674CEF774738D0CEedDF095C13f9d2";
 
 export const betMemeAbi = [
   {
