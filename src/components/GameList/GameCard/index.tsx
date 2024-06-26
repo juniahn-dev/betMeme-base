@@ -48,7 +48,7 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
   ).toFixed(2);
 
   return (
-    <ul className={styles.container}>
+    <ul className={styles.cardContainer}>
       {game.isEnded && (
         <div
           className={clsx(
