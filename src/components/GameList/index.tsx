@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import { betMemeAbi, betMemeContractAddress } from "@/constant/betMeme";
 import styles from "./index.module.scss";
 import GameCard from "./GameCard";
+import { orderBy } from "lodash";
 
 export interface IGameProps {
   gameId: BigInt;
@@ -55,7 +56,7 @@ const GameList = () => {
           };
         });
 
-        setGames(parseGameList);
+        setGames(orderBy(parseGameList, "gameId", "desc"));
       } catch (error) {
         console.error("게임 목록 불러오기 실패:", error);
       }

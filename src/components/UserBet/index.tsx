@@ -8,7 +8,7 @@ import TrophyLottie from "@/assets/icons/lottie/TrophyLottie.json";
 import GiftLottie from "@/assets/icons/lottie/GiftLottie.json";
 import PendingLottie from "@/assets/icons/lottie/PendingLottie.json";
 import { numberWithCommas } from "@/utils/formatNumber";
-import { isEmpty } from "lodash";
+import { isEmpty, orderBy } from "lodash";
 import dynamic from "next/dynamic";
 import clsx from "clsx";
 import { getPrice } from "@/utils/makeCoins";
@@ -73,7 +73,7 @@ const UserBet = () => {
             });
           }
 
-          setBets(allBets);
+          setBets(orderBy(allBets, "gameId", "desc"));
         }
       } catch (error) {
         console.error("게임 목록 불러오기 실패:", error);
