@@ -32,7 +32,7 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
 
   const betGame = async (gameId: string, position: boolean) => {
     if (!window.ethereum) {
-      alert("Metamask가 설치되지 않았습니다.");
+      alert("Not installed Metamask");
       return;
     }
 
@@ -62,10 +62,10 @@ const BetMemeModal: React.FC<IBetMemeModalProps> = ({
       );
 
       await tx.wait();
-      alert("게임 배팅 성공!");
+      alert("Game betting successful!");
     } catch (error) {
-      console.error("게임 배팅 실패:", error);
-      alert("게임 배팅 실패");
+      console.error("Game betting fail:", error);
+      alert("Game betting fail");
     } finally {
       setTxLoading(false);
     }

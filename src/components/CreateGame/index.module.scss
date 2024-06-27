@@ -17,3 +17,27 @@
 .wrapper {
   width: 100%;
 }
+
+.selectContainer {
+  margin-bottom: 10px;
+}
+
+.selectTitle {
+  margin-bottom: 10px;
+}
+
+.selectContent {
+  background-color: rgba(41, 41, 41, 0.5);
+  padding: 10px;
+
+  color: #fff;
+
+  &:hover {
+    background-color: rgba(41, 41, 41, 0.5);
+  }
+}
+
+.tokenImg {
+  width: 20px;
+  height: 20px;
+}

@@ -5,13 +5,13 @@ import { useEffect, useState } from "react";
 import { useRecoilValue } from "recoil";
 import styles from "./index.module.scss";
 import TrophyLottie from "@/assets/icons/lottie/TrophyLottie.json";
-import GiftLottie from "@/assets/icons/lottie/GiftLottie.json";
 import PendingLottie from "@/assets/icons/lottie/PendingLottie.json";
 import { numberWithCommas } from "@/utils/formatNumber";
 import { isEmpty, orderBy } from "lodash";
 import dynamic from "next/dynamic";
 import clsx from "clsx";
 import { getPrice } from "@/utils/makeCoins";
+import BadIconPNG from "@/assets/icons/common/BadIcon.png";
 
 const Lottie = dynamic(() => import("../Common/Lottie"), {
   ssr: false,
@@ -21,7 +21,7 @@ interface IBetsProps {
   amount: string;
   betUp: boolean;
   gameId: BigInt;
-  status: "PENDING" | "WON" | "LOSE";
+  status: "PENDING" | "WON" | "LOST";
   markedPrice: string;
   lastPrice: string;
   prizeAmount: string;
@@ -35,7 +35,7 @@ const UserBet = () => {
   useEffect(() => {
     const fetchGameList = async () => {
       if (!window.ethereum) {
-        alert("Metamask가 설치되지 않았습니다.");
+        alert("Not installed Metamask");
         return;
       }
 
@@ -76,7 +76,7 @@ const UserBet = () => {
           setBets(orderBy(allBets, "gameId", "desc"));
         }
       } catch (error) {
-        console.error("게임 목록 불러오기 실패:", error);
+        console.error("Failed to load game list:", error);
       }
     };
 
@@ -121,10 +121,7 @@ const UserBet = () => {
                           className={styles.lottie}
                         />
                       ) : (
-                        <Lottie
-                          lottieData={GiftLottie}
-                          className={styles.lottie}
-                        />
+                        <img src={BadIconPNG.src} className={styles.badIcon} />
                       )}
                     </>
                   )}
@@ -143,27 +140,36 @@ const UserBet = () => {
                     Bet Amount
                     <div>{numberWithCommas(Number(v.amount) / 10 ** 18)}</div>
                   </div>
-                  {Number(v.lastPrice) <= 0 && (
-                    <>
-                      <div className={styles.priceWrapper}>
-                        <div className={styles.priceContainer}>
-                          <div className={styles.priceTitle}>Start Price</div>
-                          <div>{Number(v.markedPrice).toFixed(10)}</div>
-                        </div>
-                        <div className={styles.priceContainer}>
-                          <div className={styles.priceTitle}>Current Price</div>
-                          <div>{price}</div>
-                        </div>
+                  <div className={styles.priceWrapper}>
+                    <div className={styles.priceContainer}>
+                      <div className={styles.priceTitle}>Start Price</div>
+                      <div>{Number(v.markedPrice).toFixed(10)}</div>
+                    </div>
+                    <div className={styles.priceContainer}>
+                      <div className={styles.priceTitle}>
+                        {Number(v.lastPrice) <= 0
+                          ? "Current Price"
+                          : "Last Price"}
                       </div>
-                      <div
-                        className={clsx(
-                          styles.percentage,
-                          pricePercentage > 0 && styles.isPlus
-                        )}
-                      >
-                        {pricePercentage.toFixed(2)} %
+                      <div>
+                        {Number(v.lastPrice) <= 0 ? price : v.lastPrice}
                       </div>
-                    </>
+                    </div>
+                  </div>
+                  {v.status === "WON" && (
+                    <div className={clsx(styles.percentage, styles.won)}>
+                      Prize: {v.prizeAmount}
+                    </div>
+                  )}
+                  {v.status === "PENDING" && (
+                    <div
+                      className={clsx(
+                        styles.percentage,
+                        pricePercentage > 0 && styles.isPlus
+                      )}
+                    >
+                      {pricePercentage.toFixed(2)} %
+                    </div>
                   )}
                 </div>
               </div>

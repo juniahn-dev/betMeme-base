@@ -5,8 +5,11 @@ import { betMemeAbi, betMemeContractAddress } from "@/constant/betMeme";
 import InputBox from "../Common/InputBox";
 import Button from "../Common/Button";
 import LottieContainer from "../Common/Loading";
+import { Option, Select } from "@mui/joy";
+import { coins } from "@/utils/makeCoins";
 
 const CreateGame = () => {
+  // const [coinId, setCoinId] = useState('');
   const [markedPrice, setMarkedPrice] = useState("");
   const [duration, setDuration] = useState("");
   const [minAmount, setMinAmount] = useState("");
@@ -15,7 +18,7 @@ const CreateGame = () => {
 
   const createGame = async () => {
     if (!window.ethereum) {
-      alert("Metamask가 설치되지 않았습니다.");
+      alert("Not installed Metamask");
       return;
     }
 
@@ -38,12 +41,23 @@ const CreateGame = () => {
       );
 
       await tx.wait();
-      alert("게임 생성 성공!");
+      alert("Game created successful!");
     } catch (error) {
-      console.error("게임 생성 실패:", error);
-      alert("게임 생성 실패.");
+      console.error("Game created fail:", error);
+      alert("Game created fail.");
     } finally {
       setTxLoading(false);
+    }
+  };
+
+  const handleChange = (
+    event: React.SyntheticEvent | null,
+    value: string | null
+  ) => {
+    event?.preventDefault();
+
+    if (value) {
+      setTokenAddress(value);
     }
   };
 
@@ -53,6 +67,25 @@ const CreateGame = () => {
         <LottieContainer />
       ) : (
         <div className={styles.wrapper}>
+          <div className={styles.selectContainer}>
+            <div className={styles.selectTitle}>Coin</div>
+            <Select
+              className={styles.selectContent}
+              placeholder="Choose coin"
+              size="md"
+              variant="solid"
+              onChange={handleChange}
+            >
+              {coins.map((v) => {
+                return (
+                  <Option key={v.address} value={v.address}>
+                    <img className={styles.tokenImg} src={v.image} />
+                    {v.denom}
+                  </Option>
+                );
+              })}
+            </Select>
+          </div>
           <InputBox
             title="Marked Price"
             placeholder="Marked Price"
@@ -74,13 +107,13 @@ const CreateGame = () => {
             onChange={(val) => setMinAmount(val.target.value)}
             required={true}
           />
-          <InputBox
+          {/* <InputBox
             title="Token Address"
             placeholder="Token Address"
             value={tokenAddress}
             onChange={(val) => setTokenAddress(val.target.value)}
             required={true}
-          />
+          /> */}
           <Button name="Create Game" onClick={createGame} />
         </div>
       )}

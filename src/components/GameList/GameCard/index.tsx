@@ -81,7 +81,7 @@ const GameCard: React.FC<IGameCardProps> = ({ game }) => {
                 name="copy"
                 onClick={() => {
                   navigator.clipboard.writeText(
-                    `${frameLink}${Number(game.gameId)}/${game.token}`
+                    `${frameLink}${Number(game.gameId)}/${game.token}/${Number(game.startTime) + Number(game.duration)}`
                   );
                   alert("copy frame link!");
                 }}

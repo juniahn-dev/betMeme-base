@@ -26,7 +26,7 @@ const GameList = () => {
   useEffect(() => {
     const fetchGameList = async () => {
       if (!window.ethereum) {
-        alert("Metamask가 설치되지 않았습니다.");
+        alert("Not installed Metamask");
         return;
       }
 
@@ -58,7 +58,7 @@ const GameList = () => {
 
         setGames(orderBy(parseGameList, "gameId", "desc"));
       } catch (error) {
-        console.error("게임 목록 불러오기 실패:", error);
+        console.error("Failed to load game list:", error);
       }
     };
 

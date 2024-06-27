@@ -91,6 +91,11 @@
   height: 85% !important;
 }
 
+.badIcon {
+  margin-top: 35px;
+  width: 75px;
+}
+
 .pending {
   margin-top: 20px;
   height: 60% !important;
@@ -138,5 +143,9 @@
 
   &.isPlus {
     color: #15ae62;
+  }
+
+  &.won {
+    color: #fff;
   }
 }
